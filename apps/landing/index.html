@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mortgage Simulator</title>
+    <meta name="description" content="Estimate your mortgage payments and interest with a fast, simple calculator." />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-800">
+    <header class="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-10">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">MS</span>
+          <span>Mortgage Simulator</span>
+        </a>
+        <nav class="hidden sm:flex items-center gap-6 text-sm">
+          <a href="#features" class="hover:text-indigo-600">Features</a>
+          <a href="#how" class="hover:text-indigo-600">How it works</a>
+          <a href="#cta" class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 font-medium text-white shadow hover:bg-indigo-500">Open App</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4">
+      <section class="py-16 sm:py-24 text-center">
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900">
+          Simulate your mortgage in seconds
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+          Estimate monthly payments, total interest, and amortization without sign‑ups
+          or spreadsheets.
+        </p>
+        <div id="cta" class="mt-8 flex justify-center gap-3">
+          <a href="/apps/web/" class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-6 py-3 text-white font-medium shadow hover:bg-indigo-500">
+            Launch Simulator
+          </a>
+          <a href="#features" class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-6 py-3 font-medium text-slate-800 hover:bg-slate-100">
+            Learn more
+          </a>
+        </div>
+      </section>
+
+      <section id="features" class="py-12 grid sm:grid-cols-3 gap-6">
+        <div class="rounded-lg border bg-white p-6 shadow-sm">
+          <h3 class="font-semibold">Fast calculations</h3>
+          <p class="mt-2 text-sm text-slate-600">Real‑time updates as you tweak principal, rate, and term.</p>
+        </div>
+        <div class="rounded-lg border bg-white p-6 shadow-sm">
+          <h3 class="font-semibold">Amortization details</h3>
+          <p class="mt-2 text-sm text-slate-600">Break down principal vs. interest across the loan lifespan.</p>
+        </div>
+        <div class="rounded-lg border bg-white p-6 shadow-sm">
+          <h3 class="font-semibold">No data stored</h3>
+          <p class="mt-2 text-sm text-slate-600">Runs entirely in your browser—no accounts or databases.</p>
+        </div>
+      </section>
+
+      <section id="how" class="py-12">
+        <div class="rounded-xl border bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-semibold">How it works</h2>
+          <ol class="mt-3 list-decimal pl-5 text-slate-700 space-y-2 text-sm">
+            <li>Enter loan amount, rate (APR), and term.</li>
+            <li>Optionally add extra monthly payments.</li>
+            <li>See monthly cost and interest totals instantly.</li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mt-16 border-t py-8 text-center text-sm text-slate-500">
+      <p>© <span id="year"></span> Mortgage Simulator</p>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+
