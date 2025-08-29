@@ -1,75 +1,252 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mortgage Simulator</title>
-    <meta name="description" content="Estimate your mortgage payments and interest with a fast, simple calculator." />
+    <title>Simulador de hipoteca | Calcula cuotas, intereses y bonificaciones</title>
+    <meta name="description" content="Simula tu hipoteca en segundos. Compara interés fijo y variable, calcula amortizaciones, visualiza intereses totales y entiende el impacto de las bonificaciones." />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Simulador de hipoteca | Calcula cuotas, intereses y bonificaciones" />
+    <meta property="og:description" content="Simula tu hipoteca en segundos. Compara interés fijo y variable, calcula amortizaciones, visualiza intereses totales y entiende el impacto de las bonificaciones." />
+    <meta property="og:image" content="https://dummyimage.com/1200x630/0ea5e9/ffffff&text=Simulador+de+hipoteca" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Simulador de hipoteca | Calcula cuotas, intereses y bonificaciones" />
+    <meta name="twitter:description" content="Simula tu hipoteca en segundos. Compara interés fijo y variable, calcula amortizaciones, visualiza intereses totales y entiende el impacto de las bonificaciones." />
+    <meta name="twitter:image" content="https://dummyimage.com/1200x630/0ea5e9/ffffff&text=Simulador+de+hipoteca" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Simulador de Hipoteca",
+        "url": "https://example.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://example.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- App styles: fonts + motion preferences -->
+    <style>
+      :root { color-scheme: light; }
+      body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+      @media (prefers-reduced-motion: reduce) {
+        * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-slate-50 text-slate-800">
-    <header class="border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-10">
-      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white">MS</span>
-          <span>Mortgage Simulator</span>
-        </a>
-        <nav class="hidden sm:flex items-center gap-6 text-sm">
-          <a href="#features" class="hover:text-indigo-600">Features</a>
-          <a href="#how" class="hover:text-indigo-600">How it works</a>
-          <a href="#cta" class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 font-medium text-white shadow hover:bg-indigo-500">Open App</a>
-        </nav>
+  <body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b border-gray-200">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#inicio" class="inline-flex items-center gap-2" aria-label="Inicio">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-sky-500 text-white font-semibold">MS</span>
+            <span class="text-base font-semibold tracking-tight">Simulador de Hipoteca</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6 text-sm" aria-label="Principal">
+            <a href="#beneficios" class="hover:text-sky-600 transition-colors">Beneficios</a>
+            <a href="#funcionalidades" class="hover:text-sky-600 transition-colors">Funcionalidades</a>
+            <a href="#consejos" class="hover:text-sky-600 transition-colors">Consejos</a>
+          </nav>
+          <div class="flex items-center">
+            <a href="/apps/web/" aria-label="Simular gratis" class="inline-flex items-center justify-center rounded-md bg-yellow-400 px-4 py-2 md:px-5 md:py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-black/5 transition-colors motion-safe:duration-200 hover:bg-emerald-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500">
+              Simular gratis
+            </a>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4">
-      <section class="py-16 sm:py-24 text-center">
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900">
-          Simulate your mortgage in seconds
-        </h1>
-        <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-          Estimate monthly payments, total interest, and amortization without sign‑ups
-          or spreadsheets.
-        </p>
-        <div id="cta" class="mt-8 flex justify-center gap-3">
-          <a href="/apps/web/" class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-6 py-3 text-white font-medium shadow hover:bg-indigo-500">
-            Launch Simulator
-          </a>
-          <a href="#features" class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-6 py-3 font-medium text-slate-800 hover:bg-slate-100">
-            Learn more
-          </a>
+    <main id="inicio" class="relative">
+      <!-- Hero -->
+      <section class="bg-white/60">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+              ¿Sabes cuánto te va a costar tu hipoteca realmente?
+            </h1>
+            <p class="mt-4 text-base sm:text-lg text-gray-700 max-w-prose">
+              Simula tu hipoteca en segundos y descubre el coste real de intereses, bonificaciones y condiciones.
+            </p>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="/apps/web/" aria-label="Empieza a simular gratis" class="inline-flex items-center justify-center rounded-md bg-yellow-400 px-5 py-3 text-base font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-black/5 transition-colors motion-safe:duration-200 hover:bg-emerald-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500">
+                Empieza a simular gratis
+              </a>
+              <a href="#beneficios" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-3 text-base font-medium text-gray-900 shadow-sm transition-colors motion-safe:duration-200 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500">
+                Conoce los beneficios
+              </a>
+            </div>
+          </div>
+          <figure class="relative">
+            <div class="aspect-[4/3] w-full rounded-xl border-2 border-dashed border-sky-200 bg-white shadow-sm overflow-hidden">
+              <img src="https://dummyimage.com/800x600/f8fafc/94a3b8&text=Captura+del+simulador" alt="Captura del simulador de hipoteca" class="h-full w-full object-cover" />
+            </div>
+            <figcaption class="sr-only">Vista previa del simulador</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section id="features" class="py-12 grid sm:grid-cols-3 gap-6">
-        <div class="rounded-lg border bg-white p-6 shadow-sm">
-          <h3 class="font-semibold">Fast calculations</h3>
-          <p class="mt-2 text-sm text-slate-600">Real‑time updates as you tweak principal, rate, and term.</p>
-        </div>
-        <div class="rounded-lg border bg-white p-6 shadow-sm">
-          <h3 class="font-semibold">Amortization details</h3>
-          <p class="mt-2 text-sm text-slate-600">Break down principal vs. interest across the loan lifespan.</p>
-        </div>
-        <div class="rounded-lg border bg-white p-6 shadow-sm">
-          <h3 class="font-semibold">No data stored</h3>
-          <p class="mt-2 text-sm text-slate-600">Runs entirely in your browser—no accounts or databases.</p>
+      <!-- Beneficios principales -->
+      <section id="beneficios" class="py-14 sm:py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 class="text-sky-500 text-sm font-semibold tracking-wider">¿Por qué usar nuestro simulador de hipotecas?</h2>
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <article class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+              <div class="flex items-center gap-3">
+                <svg class="h-6 w-6 text-emerald-500" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h16M4 6h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <h3 class="text-base font-semibold">Simulación de cuota hipotecaria</h3>
+              </div>
+              <p class="mt-3 text-sm text-gray-700">Calcula de forma inmediata la cuota mensual de tu hipoteca tanto a interés fijo como variable.</p>
+            </article>
+            <!-- Card 2 -->
+            <article class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+              <div class="flex items-center gap-3">
+                <svg class="h-6 w-6 text-emerald-500" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <h3 class="text-base font-semibold">Impacto de las bonificaciones</h3>
+              </div>
+              <p class="mt-3 text-sm text-gray-700">Comprende cómo afectan los seguros, nóminas u otros requisitos al tipo de interés de tu préstamo.</p>
+            </article>
+            <!-- Card 3 -->
+            <article class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+              <div class="flex items-center gap-3">
+                <svg class="h-6 w-6 text-emerald-500" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 19c4-2 14-2 18 0M3 5c4 2 14 2 18 0M3 12c4-2 14-2 18 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <h3 class="text-base font-semibold">Visualización de intereses totales</h3>
+              </div>
+              <p class="mt-3 text-sm text-gray-700">Conoce el importe final que pagarás a lo largo de toda la vida de tu hipoteca.</p>
+            </article>
+            <!-- Card 4 -->
+            <article class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+              <div class="flex items-center gap-3">
+                <svg class="h-6 w-6 text-emerald-500" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <h3 class="text-base font-semibold">Trucos claros sobre condiciones hipotecarias</h3>
+              </div>
+              <p class="mt-3 text-sm text-gray-700">Aprende de forma sencilla cómo las condiciones de tu contrato impactan en tu bolsillo.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section id="how" class="py-12">
-        <div class="rounded-xl border bg-white p-6 shadow-sm">
-          <h2 class="text-xl font-semibold">How it works</h2>
-          <ol class="mt-3 list-decimal pl-5 text-slate-700 space-y-2 text-sm">
-            <li>Enter loan amount, rate (APR), and term.</li>
-            <li>Optionally add extra monthly payments.</li>
-            <li>See monthly cost and interest totals instantly.</li>
-          </ol>
+      <!-- Funcionalidades destacadas -->
+      <section id="funcionalidades" class="bg-white py-14 sm:py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+          <h2 class="text-2xl sm:text-3xl font-extrabold">Todo lo que necesitas para entender tu hipoteca</h2>
+
+          <!-- Item A -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="order-2 lg:order-1">
+              <h3 class="text-lg font-semibold">Compara tipos de interés fijo y variable</h3>
+              <p class="mt-2 text-gray-700">Visualiza en segundos cómo cambia tu cuota en cada modalidad.</p>
+            </div>
+            <div class="order-1 lg:order-2">
+              <div class="aspect-[16/9] w-full rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 overflow-hidden">
+                <img src="https://dummyimage.com/960x540/ffffff/d1d5db&text=Grafica:+Fijo+vs+Variable" alt="Comparativa de cuota entre interés fijo y variable" class="h-full w-full object-cover" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Item B -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="aspect-[16/9] w-full rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 overflow-hidden">
+                <img src="https://dummyimage.com/960x540/ffffff/d1d5db&text=Amortizaciones+anticipadas" alt="Ejemplo de amortización anticipada en el simulador" class="h-full w-full object-cover" />
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold">Calcula amortizaciones anticipadas</h3>
+              <p class="mt-2 text-gray-700">Simula cancelaciones parciales o totales y observa cuánto dinero puedes ahorrar.</p>
+            </div>
+          </div>
+
+          <!-- Item C -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="order-2 lg:order-1">
+              <h3 class="text-lg font-semibold">Evalúa el impacto de las bonificaciones</h3>
+              <p class="mt-2 text-gray-700">Descubre el coste real de las vinculaciones en caso de cumplirlas o incumplirlas.</p>
+            </div>
+            <div class="order-1 lg:order-2">
+              <div class="aspect-[16/9] w-full rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 overflow-hidden">
+                <img src="https://dummyimage.com/960x540/ffffff/d1d5db&text=Bonificaciones:+con+y+sin" alt="Comparación de intereses con y sin bonificaciones" class="h-full w-full object-cover" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Item D -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="aspect-[16/9] w-full rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 overflow-hidden">
+                <img src="https://dummyimage.com/960x540/ffffff/d1d5db&text=Analisis+completo+de+costes" alt="Análisis completo de costes de la hipoteca" class="h-full w-full object-cover" />
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold">Análisis completo de costes</h3>
+              <p class="mt-2 text-gray-700">Ten una visión clara y transparente de lo que pagarás en total.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección educativa / consejos -->
+      <section id="consejos" class="bg-gray-50 py-14 sm:py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 class="text-2xl sm:text-3xl font-extrabold">Consejos para ahorrar en tu hipoteca</h2>
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Consejo 1 -->
+            <article class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+              <h3 class="text-lg font-semibold">Bonificaciones del interés</h3>
+              <p class="mt-3 text-gray-700">Los beneficios por contratar productos vinculados (seguros, nómina, tarjetas) pueden convertirse en aumentos de hasta un <strong>15% en tu cuota mensual</strong> si en el futuro dejas de cumplirlos.</p>
+            </article>
+            <!-- Consejo 2 -->
+            <article class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+              <h3 class="text-lg font-semibold">Condiciones de cancelación</h3>
+              <p class="mt-3 text-gray-700">Negociar cláusulas de cancelación favorables te ofrece la flexibilidad de <strong>renegociar o cancelar tu hipoteca</strong> más adelante, ahorrando miles de euros en intereses.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cierre / CTA final -->
+      <section class="bg-sky-500 text-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+          <p class="text-xl sm:text-2xl font-semibold">Empieza a simular tu hipoteca ahora mismo y evita sorpresas futuras.</p>
+          <div class="mt-6">
+            <a href="/apps/web/" aria-label="Simular mi hipoteca" class="inline-flex items-center justify-center rounded-md bg-yellow-400 px-6 py-3 text-base font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-white/20 transition-colors motion-safe:duration-200 hover:bg-emerald-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-sky-500 focus-visible:ring-white">
+              Simular mi hipoteca
+            </a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="mt-16 border-t py-8 text-center text-sm text-slate-500">
-      <p>© <span id="year"></span> Mortgage Simulator</p>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+          <p class="text-gray-600">© <span id="year"></span> Simulador de Hipoteca</p>
+          <nav class="flex items-center gap-6" aria-label="Legal">
+            <a href="#" class="text-gray-700 hover:text-sky-600 transition-colors">Contacto</a>
+            <a href="#" class="text-gray-700 hover:text-sky-600 transition-colors">Política de privacidad</a>
+            <a href="#" class="text-gray-700 hover:text-sky-600 transition-colors">Aviso legal</a>
+          </nav>
+        </div>
+      </div>
     </footer>
 
     <script>
@@ -77,4 +254,3 @@
     </script>
   </body>
   </html>
-
