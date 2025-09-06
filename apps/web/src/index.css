@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@layer components {
+  .no-spinner {
+    -moz-appearance: textfield;
+  }
+
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+}
+
+body {
+  background-color: oklch(97% 0.001 106.424);
+  background-image: radial-gradient(oklch(86.9% 0.005 56.366), 1px, transparent 1px);
+  background-size: 25px 25px; /* distance between dots */
+}
