@@ -1,0 +1,21 @@
+export const REGIONS = [
+  { value: "andalucia", label: "Andalucía" },
+  { value: "aragon", label: "Aragón" },
+  { value: "asturias", label: "Principado de Asturias" },
+  { value: "baleares", label: "Islas Baleares" },
+  { value: "canarias", label: "Canarias" },
+  { value: "cantabria", label: "Cantabria" },
+  { value: "castilla_la_mancha", label: "Castilla-La Mancha" },
+  { value: "castilla_y_leon", label: "Castilla y León" },
+  { value: "catalunya", label: "Cataluña" },
+  { value: "extremadura", label: "Extremadura" },
+  { value: "galicia", label: "Galicia" },
+  { value: "madrid", label: "Comunidad de Madrid" },
+  { value: "murcia", label: "Región de Murcia" },
+  { value: "navarra", label: "Comunidad Foral de Navarra" },
+  { value: "pais_vasco", label: "País Vasco" },
+  { value: "la_rioja", label: "La Rioja" },
+  { value: "valencia", label: "Comunidad Valenciana" },
+  { value: "ceuta", label: "Ceuta" },
+  { value: "melilla", label: "Melilla" }
+];

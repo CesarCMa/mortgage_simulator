@@ -11,7 +11,7 @@ function BinaryCheckBox({ labels = ["Yes", "No"], onChange }) {
   };
 
   return (
-    <div className="flex space-x-4 items-center">
+    <div className="flex space-x-4 items-center text-slate-700">
       {labels.map((label, index) => (
         <label key={index} className="flex items-center space-x-1 cursor-pointer">
           <input

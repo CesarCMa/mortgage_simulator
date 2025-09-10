@@ -2,26 +2,53 @@ import EuroInput from "./EuroInput";
 import NumberInput from "./NumberInput";
 import PercentageInput from "./PercentageInput";
 import BinaryCheckBox from "./BinaryCheckBox";
+import MultiSelect from "./MultiSelect";
+import * as interestRates from "../data/interest_rates";
 
 const MortgageInfoForm = () => {
   return (
-    <form className="flex flex-col border border-slate-400 p-6 rounded-2xl bg-white/50">
-      <div className="flex my-2 justify-between">
-        <label htmlFor="houseCost" className="text-slate-700 mr-4">Coste del Inmueble:</label>
-        <EuroInput id="houseCost" incrementMultiplier={10000}/>
+    <form
+      className="flex flex-col border border-slate-400 p-6 rounded-2xl bg-white/50"
+      onSubmit={(e) => e.preventDefault()}
+    >
+      <div className="flex flex-col sm:flex-row my-2 justify-between">
+        <label htmlFor="houseCost" className="text-slate-700 mr-4 my-1">
+          Coste del Inmueble:
+        </label>
+        <EuroInput id="houseCost" incrementMultiplier={10000} />
       </div>
-      <div className="flex my-2 justify-between">
-        <label htmlFor="savings" className="text-slate-700 mr-4">Ahorro aportado:</label>
-        <EuroInput id="saving" incrementMultiplier={10000}/>
+      <div className="flex flex-col sm:flex-row my-2 justify-between">
+        <label htmlFor="savings" className="text-slate-700 mr-4 my-1">
+          Ahorro aportado:
+        </label>
+        <EuroInput id="saving" incrementMultiplier={10000} />
       </div>
-      <div className="flex my-2 justify-between">
-        <label htmlFor="years" className="text-slate-700 mr-4">Duración (años):</label>
-        <NumberInput id="years" incrementMultiplier={5}/>
+      <div className="flex my-2 justify-between flex-col sm:flex-row">
+        <label htmlFor="years" className="text-slate-700 mr-4 py-1">
+          Duración (años):
+        </label>
+        <NumberInput id="years" incrementMultiplier={5} />
       </div>
-      <div className="flex my-2 justify-between">
-        <label htmlFor="interest" className="text-slate-700 mr-4">Interés:</label>
-        <BinaryCheckBox labels={["fijo", "variable"]}/>
-        <PercentageInput id="interest" step={0.1}/>
+      <div className="flex my-2 justify-between flex-col sm:flex-row">
+        <div className="flex my-1">
+          <label htmlFor="interest" className="text-slate-700 mr-4 py-1">
+            Interés:
+          </label>
+          <BinaryCheckBox labels={["fijo", "variable"]} />
+        </div>
+        <PercentageInput id="interest" step={0.1} />
+      </div>
+      <div className="flex my-2 justify-between sm:items-center flex-col sm:flex-row">
+        <label htmlFor="place" className="text-slate-700 mr-4 py-1">
+          Localización:
+        </label>
+        <MultiSelect regions={interestRates.REGIONS} />
+      </div>
+      <div className="flex my-2 justify-between flex-col sm:flex-row">
+        <label htmlFor="interest" className="text-slate-700 mr-4 py-1">
+          Tipo de inmueble:
+        </label>
+        <BinaryCheckBox labels={["obra nueva", "segunda mano"]} />
       </div>
     </form>
   );
