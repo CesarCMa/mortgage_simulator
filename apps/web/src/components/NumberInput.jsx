@@ -1,10 +1,20 @@
 import { useState } from "react";
 
 function NumberInput(props) {
-  const { id, incrementMultiplier } = props;
-  const [value, setValue] = useState(0);
-  const increment = () => setValue((prev) => prev + incrementMultiplier);
-  const decrement = () => setValue((prev) => prev - incrementMultiplier);
+  const { id, incrementMultiplier, value, onChange } = props;
+  const [innerValue, setInnerValue] = useState(value);
+
+  const increment = () => {
+    const newValue = innerValue + incrementMultiplier;
+    setInnerValue(newValue);
+    onChange(newValue);
+  };
+
+  const decrement = () => {
+    const newValue = innerValue - incrementMultiplier;
+    setInnerValue(newValue);
+    onChange(newValue);
+  };
   return (
     <div className="flex items-center text-slate-700">
       {" "}
@@ -15,8 +25,12 @@ function NumberInput(props) {
       <input
         id={id}
         type="number"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        value={innerValue}
+        onChange={(e) => {
+          const newValue = Number(e.target.value);
+          setInnerValue(newValue);
+          onChange(newValue);
+        }}
         className="no-spinner border border-slate-400 rounded-md mx-2 text-center"
       />{" "}
       <button type="button" onClick={increment}>

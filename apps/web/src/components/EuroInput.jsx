@@ -1,17 +1,27 @@
 import { useState } from "react";
 
 function EuroInput(props) {
-  const { id, incrementMultiplier } = props;
-  const [value, setValue] = useState(0);
+  const { id, incrementMultiplier, value, onChange } = props;
+  const [innerValue, setInnerValue] = useState(value);
 
   const formatter = new Intl.NumberFormat("de-DE"); // de-DE uses dots for thousands
 
-  const increment = () => setValue((prev) => prev + incrementMultiplier);
-  const decrement = () => setValue((prev) => Math.max(0, prev - incrementMultiplier)); // avoid negatives if you want
+  const increment = () => {
+    const newValue = innerValue + incrementMultiplier;
+    setInnerValue(newValue);
+    onChange(newValue);
+  };
+  const decrement = () => {
+    const newValue = Math.max(0, innerValue - incrementMultiplier);
+    setInnerValue(newValue );
+    onChange(newValue);
+  };
 
   const handleChange = (e) => {
     const raw = e.target.value.replace(/\D/g, "");
-    setValue(Number(raw) || 0);
+    const newValue = parseInt(raw) || 0;
+    setInnerValue(newValue);
+    onChange(newValue);
   };
 
   return (
@@ -23,7 +33,7 @@ function EuroInput(props) {
       <input
         id={id}
         type="text"
-        value={value ? formatter.format(value) + " €" : ""}
+        value={innerValue ? formatter.format(innerValue) + " €" : ""}
         onChange={handleChange}
         className="no-spinner border border-slate-400 rounded-md mx-2 text-center"
       />

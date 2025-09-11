@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function BinaryCheckBox({ labels = ["Yes", "No"], onChange }) {
-  const [selected, setSelected] = useState(null);
+function BinaryCheckBox({ labels = ["No", "Yes"],value,  onChange }) {
+  const [selected, setSelected] = useState(Number(value));
 
   const handleSelect = (value) => {
     setSelected(value);
     if (onChange) {
-      onChange(value);
+      onChange(Boolean(value));
     }
   };
 
@@ -18,7 +18,7 @@ function BinaryCheckBox({ labels = ["Yes", "No"], onChange }) {
             type="checkbox"
             checked={selected === index}
             onChange={() => handleSelect(index)}
-            className="form-checkbox text-emerald-500"
+            className="form-checkbox"
           />
           <span>{label}</span>
         </label>
