@@ -1,36 +1,79 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function PercentageInput({ id, step = 0.01, value,  onChange }) {
+function PercentageInput({ id, step = 0.01, value, onChange }) {
   const [innerValue, setInnerValue] = useState(value);
+  const [isFocused, setIsFocused] = useState(false);
+  const [text, setText] = useState("");
 
   const formatter = new Intl.NumberFormat("de-DE", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 
+  useEffect(() => {
+    setInnerValue(value);
+    if (!isFocused) {
+      setText("");
+    }
+  }, [value]);
+
+  const toDisplayText = (num) => String(num).replace(".", ",");
+
+  const sanitise = (s) => {
+    const normalised = s.replace(/\./g, ",");
+    const allowed = normalised.replace(/[^\d,]/g, "");
+    const firstComma = allowed.indexOf(",");
+    if (firstComma === -1) return allowed;
+    const before = allowed.slice(0, firstComma + 1);
+    const after = allowed.slice(firstComma + 1).replace(/,/g, "");
+    return before + after;
+  };
+
+  const maybeParse = (s) => {
+    // Parse only when we have a complete number (not ending with comma)
+    if (!s) return null;
+    if (s.endsWith(",")) return null;
+    // Replace comma with dot for JS parse
+    const raw = s.replace(",", ".");
+    const parsed = parseFloat(raw);
+    return isNaN(parsed) ? null : parsed;
+  };
+
   const handleChange = (e) => {
-    // Extract numbers, allow comma/dot for decimals
-    const raw = e.target.value.replace(/[^0-9.,]/g, "").replace(",", ".");
-    const num = parseFloat(raw);
-    const safeNum = isNaN(num) ? 0 : num;
-    setInnerValue(safeNum);
-    if (onChange) onChange(safeNum);
+    const next = sanitise(e.target.value);
+    setText(next);
+    const parsed = maybeParse(next);
+    if (parsed !== null) {
+      const rounded = +parsed.toFixed(2);
+      setInnerValue(rounded);
+      if (onChange) onChange(rounded);
+    }
   };
 
   const increment = () => {
     setInnerValue((prev) => {
-      const newVal = +(prev + step).toFixed(2);
+      const newVal = +((prev ?? 0) + step).toFixed(2);
       if (onChange) onChange(newVal);
+      // If focused, reflect change in text using comma
+      if (isFocused) setText(toDisplayText(newVal));
       return newVal;
     });
   };
 
   const decrement = () => {
     setInnerValue((prev) => {
-      const newVal = +(prev - step).toFixed(2);
+      const newVal = +((prev ?? 0) - step).toFixed(2);
       if (onChange) onChange(newVal);
+      if (isFocused) setText(toDisplayText(newVal));
       return newVal;
     });
+  };
+
+  const displayValue = () => {
+    if (isFocused) {
+      return text;
+    }
+    return formatter.format(innerValue) + "%";
   };
 
   return (
@@ -42,8 +85,16 @@ function PercentageInput({ id, step = 0.01, value,  onChange }) {
       <input
         id={id}
         type="text"
-        value={formatter.format(innerValue) + "%"}
+        value={displayValue()}
         onChange={handleChange}
+        onFocus={() => {
+          setIsFocused(true);
+          setText(innerValue === undefined || innerValue === null ? "" : toDisplayText(innerValue));
+        }}
+        onBlur={() => {
+          setIsFocused(false);
+          setText("");
+        }}
         className="no-spinner border border-slate-400 rounded-md mx-2 text-center w-24"
       />
 

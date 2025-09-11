@@ -3,6 +3,7 @@ import { useState } from "react";
 function EuroInput(props) {
   const { id, incrementMultiplier, value, onChange } = props;
   const [innerValue, setInnerValue] = useState(value);
+  const [isFocused, setIsFocused] = useState(false);
 
   const formatter = new Intl.NumberFormat("de-DE"); // de-DE uses dots for thousands
 
@@ -24,6 +25,13 @@ function EuroInput(props) {
     onChange(newValue);
   };
 
+  const displayValue = () => {
+    if (isFocused) {
+      return innerValue ? String(innerValue) : "";
+    }
+    return innerValue ? formatter.format(innerValue) + " €" : "";
+  };
+
   return (
     <div className="flex items-center text-slate-700">
       <button type="button" onClick={decrement}>
@@ -33,8 +41,10 @@ function EuroInput(props) {
       <input
         id={id}
         type="text"
-        value={innerValue ? formatter.format(innerValue) + " €" : ""}
+        value={displayValue()}
         onChange={handleChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         className="no-spinner border border-slate-400 rounded-md mx-2 text-center"
       />
 
