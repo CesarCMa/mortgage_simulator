@@ -3,8 +3,8 @@ import NumberInput from "./NumberInput";
 import PercentageInput from "./PercentageInput";
 import BinaryCheckBox from "./BinaryCheckBox";
 import MultiSelect from "./MultiSelect";
-import * as interestRates from "../data/interestRates";
-import * as mortgageBaseInfo from "../data/mortgageBaseInfo";
+import * as interestRates from "../../data/interestRates";
+import * as mortgageBaseInfo from "../../data/mortgageBaseInfo";
 import { useState } from "react";
 
 const MortgageInfoForm = () => {
