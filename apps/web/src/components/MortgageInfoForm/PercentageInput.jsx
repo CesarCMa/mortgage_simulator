@@ -11,6 +11,7 @@ function PercentageInput({ id, step = 0.01, value, onChange }) {
   });
 
   useEffect(() => {
+    // Keep local numeric value in sync if parent updates it
     setInnerValue(value);
     if (!isFocused) {
       setText("");
@@ -20,6 +21,7 @@ function PercentageInput({ id, step = 0.01, value, onChange }) {
   const toDisplayText = (num) => String(num).replace(".", ",");
 
   const sanitise = (s) => {
+    // Normalize dot to comma and keep only digits and a single comma
     const normalised = s.replace(/\./g, ",");
     const allowed = normalised.replace(/[^\d,]/g, "");
     const firstComma = allowed.indexOf(",");
