@@ -4,24 +4,26 @@ import PercentageInput from "./PercentageInput";
 import BinaryCheckBox from "./BinaryCheckBox";
 import MultiSelect from "./MultiSelect";
 import * as interestRates from "../../data/interestRates";
-import * as mortgageBaseInfo from "../../data/mortgageBaseInfo";
-import { useState } from "react";
+import { useMortgageContext } from "../../context/MortgageContext";
 
 const MortgageInfoForm = () => {
-  const [mortgageInfo, setMortgageInfo] = useState(
-    mortgageBaseInfo.MORTGAGE_BASE_INFO
-  );
+  const { mortgageFormInfo, updateMortgageInfo } = useMortgageContext();
 
   const handleUpdateMortgageInfo = (field) => (value) => {
-    setMortgageInfo((prev) => ({ ...prev, [field]: value }));
+    updateMortgageInfo({ ...mortgageFormInfo, [field]: value });
   };
 
-  console.log(mortgageInfo);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you can perform any validation if needed
+    console.log('Form submitted with values:', mortgageFormInfo);
+    // You can add additional logic here like API calls or calculations
+  };
 
   return (
     <form
       className="flex flex-col border border-slate-400 p-6 rounded-2xl bg-white/50"
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={handleSubmit}
     >
       <div className="flex flex-col sm:flex-row my-2 justify-between">
         <label htmlFor="houseCost" className="text-slate-700 mr-4 my-1">
@@ -30,7 +32,7 @@ const MortgageInfoForm = () => {
         <EuroInput
           id="houseCost"
           incrementMultiplier={10000}
-          value={mortgageInfo.houseCost}
+          value={mortgageFormInfo.houseCost}
           onChange={handleUpdateMortgageInfo("houseCost")}
         />
       </div>
@@ -41,7 +43,7 @@ const MortgageInfoForm = () => {
         <EuroInput
           id="saving"
           incrementMultiplier={10000}
-          value={mortgageInfo.savings}
+          value={mortgageFormInfo.savings}
           onChange={handleUpdateMortgageInfo("savings")}
         />
       </div>
@@ -52,7 +54,7 @@ const MortgageInfoForm = () => {
         <NumberInput
           id="years"
           incrementMultiplier={5}
-          value={mortgageInfo.years}
+          value={mortgageFormInfo.years}
           onChange={handleUpdateMortgageInfo("years")}
         />
       </div>
@@ -63,14 +65,14 @@ const MortgageInfoForm = () => {
           </label>
           <BinaryCheckBox
             labels={["fijo", "variable"]}
-            value={mortgageInfo.variableInterest}
+            value={mortgageFormInfo.variableInterest}
             onChange={handleUpdateMortgageInfo("variableInterest")}
           />
         </div>
         <PercentageInput
           id="interest"
           step={0.1}
-          value={mortgageInfo.interest}
+          value={mortgageFormInfo.interest}
           onChange={handleUpdateMortgageInfo("interest")}
         />
       </div>
@@ -80,7 +82,7 @@ const MortgageInfoForm = () => {
         </label>
         <MultiSelect
           regions={interestRates.REGIONS}
-          value={mortgageInfo.location}
+          value={mortgageFormInfo.location}
           onChange={handleUpdateMortgageInfo("location")}
         />
       </div>
@@ -90,9 +92,17 @@ const MortgageInfoForm = () => {
         </label>
         <BinaryCheckBox
           labels={["segunda mano", "obra nueva"]}
-          value={mortgageInfo.newBuilding}
+          value={mortgageFormInfo.newBuilding}
           onChange={handleUpdateMortgageInfo("newBuilding")}
         />
+      </div>
+      <div className="flex justify-end mt-6">
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Calcular hipoteca
+        </button>
       </div>
     </form>
   );

@@ -19,3 +19,25 @@ export const REGIONS = [
   { value: "ceuta", label: "Ceuta" },
   { value: "melilla", label: "Melilla" }
 ];
+
+export const ITP_RATES = {
+  andalucia: 0.07,
+  aragon: 0.08,
+  asturias: 0.08,
+  baleares: 0.08,
+  canarias: 0.065,
+  cantabria: 0.09,
+  castilla_la_mancha: 0.09,
+  castilla_y_leon: 0.08,
+  catalunya: 0.10,
+  extremadura: 0.08,
+  galicia: 0.08,
+  madrid: 0.06,
+  murcia: 0.08,
+  navarra: 0.06,
+  pais_vasco: 0.07,
+  la_rioja: 0.07,
+  valencia: 0.10,
+  ceuta: 0.06,
+  melilla: 0.06
+};
