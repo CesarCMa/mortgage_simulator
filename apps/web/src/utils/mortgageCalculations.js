@@ -25,6 +25,10 @@ export const calculateMortgageDetails = (mortgageInfo) => {
         Math.pow(1 + monthlyInterestRate, numberOfPayments))) /
     (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
+  const totalPaid = monthlyPayment * numberOfPayments;
+  const totalInterest = totalPaid - loanAmount;
+  const totalCost = totalFixedCosts + taxes + variableCosts + totalInterest;
+
   return {
     totalFixedCosts,
     taxes,
@@ -33,6 +37,9 @@ export const calculateMortgageDetails = (mortgageInfo) => {
     variableCosts,
     monthlyPayment,
     loanAmount,
+    numberOfPayments,
+    totalInterest,
+    totalCost,
   };
 };
 
