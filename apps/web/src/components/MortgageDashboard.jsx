@@ -23,7 +23,7 @@ export default function MortgageDashboard() {
   const totalForLegend = chartData.reduce((sum, d) => sum + d.value, 0);
 
   return (
-    <div className="flex flex-col border border-slate-400 p-6 rounded-2xl bg-white/50 w-full">
+    <div className="flex flex-col w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div className="col-span-1">
           <div className="rounded-xl bg-white/70 border border-slate-200 p-4">

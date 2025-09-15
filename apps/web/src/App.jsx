@@ -7,9 +7,13 @@ export default function App() {
     <MortgageProvider>
       <div className="flex justify-center">
         <div className="w-full max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-20">
-            <MortgageInfoForm/>
-            <MortgageDashboard/>
+          <div className="flex flex-col md:flex-row gap-6 my-20">
+            <div className="flex items-start">
+              <MortgageInfoForm/>
+            </div>
+            <div className="flex items-start">
+              <MortgageDashboard/>
+            </div>
           </div>
         </div>
       </div>
