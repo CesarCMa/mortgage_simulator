@@ -17,7 +17,7 @@ export const REGIONS = [
   { value: "la_rioja", label: "La Rioja" },
   { value: "valencia", label: "Comunidad Valenciana" },
   { value: "ceuta", label: "Ceuta" },
-  { value: "melilla", label: "Melilla" }
+  { value: "melilla", label: "Melilla" },
 ];
 
 export const ITP_RATES = {
@@ -29,7 +29,7 @@ export const ITP_RATES = {
   cantabria: 0.09,
   castilla_la_mancha: 0.09,
   castilla_y_leon: 0.08,
-  catalunya: 0.10,
+  catalunya: 0.1,
   extremadura: 0.08,
   galicia: 0.08,
   madrid: 0.06,
@@ -37,7 +37,29 @@ export const ITP_RATES = {
   navarra: 0.06,
   pais_vasco: 0.07,
   la_rioja: 0.07,
-  valencia: 0.10,
+  valencia: 0.1,
   ceuta: 0.06,
-  melilla: 0.06
+  melilla: 0.06,
+};
+
+export const IAJ_RATES = {
+  andalucia: 0.012,
+  aragon: 0.015,
+  asturias: 0.012,
+  baleares: 0.015,
+  canarias: 0.0075,
+  cantabria: 0.015,
+  castilla_la_mancha: 0.0125,
+  castilla_y_leon: 0.015,
+  catalunya: 0.015,
+  extremadura: 0.015,
+  galicia: 0.015,
+  madrid: 0.0075,
+  murcia: 0.015,
+  navarra: 0.005,
+  pais_vasco: 0.0,
+  la_rioja: 0.01,
+  valencia: 0.015,
+  ceuta: 0.005,
+  melilla: 0.005,
 };

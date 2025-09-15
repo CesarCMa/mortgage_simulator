@@ -7,3 +7,11 @@ export const MORTGAGE_BASE_INFO = {
     location: "andalucia",
     newBuilding: false,
 };
+
+export const MORTGAGE_COSTS = {
+    iva: 0.1,
+    notary: 0.4, 
+    propertyRegistry: 0.3,
+    valuation: 400,
+    gestoria: 450,
+};

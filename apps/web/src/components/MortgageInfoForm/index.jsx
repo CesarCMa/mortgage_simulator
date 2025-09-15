@@ -4,20 +4,20 @@ import PercentageInput from "./PercentageInput";
 import BinaryCheckBox from "./BinaryCheckBox";
 import MultiSelect from "./MultiSelect";
 import * as interestRates from "../../data/interestRates";
+import { useState } from "react";
 import { useMortgageContext } from "../../context/MortgageContext";
 
 const MortgageInfoForm = () => {
-  const { mortgageFormInfo, updateMortgageInfo } = useMortgageContext();
+  const { mortgageFormInfo, setMortgageFormInfo } = useMortgageContext();
+  const [formData, setFormData] = useState(mortgageFormInfo);
 
   const handleUpdateMortgageInfo = (field) => (value) => {
-    updateMortgageInfo({ ...mortgageFormInfo, [field]: value });
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can perform any validation if needed
-    console.log('Form submitted with values:', mortgageFormInfo);
-    // You can add additional logic here like API calls or calculations
+    setMortgageFormInfo(formData);
   };
 
   return (
@@ -32,7 +32,7 @@ const MortgageInfoForm = () => {
         <EuroInput
           id="houseCost"
           incrementMultiplier={10000}
-          value={mortgageFormInfo.houseCost}
+          value={formData.houseCost}
           onChange={handleUpdateMortgageInfo("houseCost")}
         />
       </div>
@@ -43,7 +43,7 @@ const MortgageInfoForm = () => {
         <EuroInput
           id="saving"
           incrementMultiplier={10000}
-          value={mortgageFormInfo.savings}
+          value={formData.savings}
           onChange={handleUpdateMortgageInfo("savings")}
         />
       </div>
@@ -54,7 +54,7 @@ const MortgageInfoForm = () => {
         <NumberInput
           id="years"
           incrementMultiplier={5}
-          value={mortgageFormInfo.years}
+          value={formData.years}
           onChange={handleUpdateMortgageInfo("years")}
         />
       </div>
@@ -65,14 +65,14 @@ const MortgageInfoForm = () => {
           </label>
           <BinaryCheckBox
             labels={["fijo", "variable"]}
-            value={mortgageFormInfo.variableInterest}
+            value={formData.variableInterest}
             onChange={handleUpdateMortgageInfo("variableInterest")}
           />
         </div>
         <PercentageInput
           id="interest"
           step={0.1}
-          value={mortgageFormInfo.interest}
+          value={formData.interest}
           onChange={handleUpdateMortgageInfo("interest")}
         />
       </div>
@@ -82,7 +82,7 @@ const MortgageInfoForm = () => {
         </label>
         <MultiSelect
           regions={interestRates.REGIONS}
-          value={mortgageFormInfo.location}
+          value={formData.location}
           onChange={handleUpdateMortgageInfo("location")}
         />
       </div>
@@ -92,7 +92,7 @@ const MortgageInfoForm = () => {
         </label>
         <BinaryCheckBox
           labels={["segunda mano", "obra nueva"]}
-          value={mortgageFormInfo.newBuilding}
+          value={formData.newBuilding}
           onChange={handleUpdateMortgageInfo("newBuilding")}
         />
       </div>
